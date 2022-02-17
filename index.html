@@ -5,17 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <script src="./dist/script.js" defer></script> -->
   </head>
   <body>
     <h1>image resizer</h1>
 
-    <form action="/process" method="post">
+    <form action="/dist/script.js" method="post" >
       <div>
-        <label for="photo">choose the photo: </label>
-        <input type="file" name="photo" id="photo" value="./images/fjord.jpg"/>
+        <label for="image">choose the image: </label>
+        <input type="file" name="image" id="image" value="./images/encenadaport.jpg" />
       </div>
-      <br>
+      <br>  
       <div>
         <label for="height">choose the height: </label>
         <input type="number" name="height" id="height" value="200"/>
@@ -23,15 +22,10 @@
       <br>
       <div>
         <label for="width">choose the width: </label>
-        <input type="number" name="width" id="width" value="200"/>
+        <input type="number" name="width" id="width" value="224"/>
       </div>
+      <br>
+      <input type="submit" >
     </form>
-
-    <script>
-      const photo = document.getElementById("photo");
-      const width = document.getElementById("width");
-      const height = document.getElementById("height");
-      console.log(photo,height,width)
-    </script>
   </body>
 </html>
