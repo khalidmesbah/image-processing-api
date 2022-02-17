@@ -4,6 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
+    "start":"nodemon ./server.js",
     "start:prod": "npm run build && node dist/script.js",
     "build": "npx tsc",
     "dev": "nodemon ./dist/script.js",
