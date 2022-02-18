@@ -1,35 +1,64 @@
-import express, { Application, Request, Response } from 'express'
+const express = require("express");
+const fs = require("fs").promises;
+const path = require("path");
+const sharp = require("sharp");
 
+// const resize = (image :string, width:number, height:number) => {
+//   sharp(`./images/${image}`)
+//     .resize(width, height)
+//     .toFile(`./resized_images/${image}_${width}_${height}`, function (err) {
+//       console.error(err);
+//     });
+// };
+// const logger = (req : Express.Request, res: Express.Response, next:object) :void=> {
+//   resize(req.body.image, +req.body.width, +req.body.height);
+//   next();
+// };
 
-const PORT = process.env.PORT || 3000
+// const isFound = (req :Express.Request, res :Express.Response, next : object) => {
+//   try {
+//     if (
+//       fs.existsSync(
+//         path.join(
+//           __dirname,
+//           `../resized_images/${req.body.image}_${+req.body.width}_${+req.body
+//             .height}`
+//         )
+//       )
+//     ) {
+//       res.sendFile(
+//         path.join(
+//           __dirname,
+//           `../resized_images/${req.body.image}_${+req.body.width}_${+req.body
+//             .height}`
+//         )
+//       );
+//       next();
+//     } else {
+//       resize(req.body.image, +req.body.width, +req.body.height);
+//       setTimeout(next(), 1000);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
+const PORT = process.env.PORT || 3000;
 
-// create an instance server
-const app: Application = express()
+const app = express();
+app.use(express.urlencoded({ extended: true }));
 
+// app.post("/process", logger, isFound, (req, res) => {
+//   res.sendFile(
+//     path.join(
+//       __dirname,
+//       `../resized_images/${req.body.image}_${+req.body.width}_${+req.body
+//         .height}`
+//     )
+//   );
+// });
 
-
-
-
-
-// add routing for / path
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message: 'Hello World 🌍'
-  })
-})
-  
-app.get('/a', (req: Request, res: Response) => {
-  res.json({
-    message: 'Hello universe 🌍'
-  })
-})
-
-
-
-// start express server
 app.listen(PORT, () => {
-  console.log(`Server is starting at prot: https://localhost:${PORT}`)
-})
-
-export default app
+  console.log(`Server is starting at prot: http://localhost:${PORT}`);
+});
+  
