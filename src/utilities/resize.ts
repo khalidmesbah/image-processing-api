@@ -1,5 +1,20 @@
-const express = require("express");
-const fs = require("fs").promises;
+import sharp from "sharp";
+
+const resizer = (image :string, width:number, height:number) => {
+    console.log(image,width,height);
+    
+  sharp(`./images/${image}`)
+    .resize(width, height)
+    .toFile(`./resized_images/${image.slice(-3)}_${width}_${height}.jpg`, function (err) {
+      console.error(err);
+    });
+};
+
+export default resizer;
+
+
+
+/* const fs = require("fs").promises;
 const path = require("path");
 const sharp = require("sharp");
 
@@ -41,23 +56,4 @@ const isFound = (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-const PORT = process.env.PORT || 3000;
-
-const app = express();
-app.use(express.urlencoded({ extended: true }));
-
-app.post("/process", logger, isFound, (req, res) => {
-  res.sendFile(
-    path.join(
-      __dirname,
-      `../resized_images/${req.body.image}_${+req.body.width}_${+req.body
-        .height}`
-    )
-  );
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is starting at prot: http://localhost:${PORT}`);
-});
+}; */

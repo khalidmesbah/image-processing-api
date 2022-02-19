@@ -2,16 +2,17 @@
   "name": "image-processing-api",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "./src/script.ts",
   "scripts": {
-    "start":"nodemon ./server.js",
+    "start": "nodemon ./server.js",
     "start:prod": "npm run build && node dist/script.js",
     "build": "npx tsc",
     "dev": "nodemon ./dist/script.js",
     "lint": "eslint script.ts",
     "lint:fix": "eslint --fix",
     "test": "npx tsc && jasmine",
-    "format": "prettier --write './src/script.ts'"
+    "format": "prettier --write './src/script.ts'",
+    "r": "nodemon --watch './src/script.ts' --exec 'tsc './src/script.ts' && node './dist/script.js''"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@types/sharp": "^0.29.5",
     "body-parser": "^1.19.2",
     "express": "^4.17.2",
     "jasmine": "^4.0.2",
