@@ -1,18 +1,18 @@
 import sharp from "sharp";
 
-const resizer = (image :string, width:number, height:number) => {
-    console.log(image,width,height);
-    
+const resizer = (image: string, width: number, height: number) => {
+  console.log(`from resize`, image, width, height);
   sharp(`./images/${image}`)
     .resize(width, height)
-    .toFile(`./resized_images/${image.slice(-3)}_${width}_${height}.jpg`, function (err) {
-      console.error(err);
-    });
+    .toFile(
+      `./resized_images/${image.slice(0, -4)}_${width}_${height}.jpg`,
+      function (err) {
+        console.error(err);
+      }
+    );
 };
 
 export default resizer;
-
-
 
 /* const fs = require("fs").promises;
 const path = require("path");
