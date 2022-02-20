@@ -11,8 +11,7 @@
     "lint": "eslint script.ts",
     "lint:fix": "eslint --fix",
     "test": "npx tsc && jasmine",
-    "format": "prettier --write './src/script.ts'",
-    "r": "nodemon --watch './src/script.ts' --exec 'tsc './src/script.ts' && node './dist/script.js''"
+    "format": "prettier --write './src/script.ts'"
   },
   "keywords": [],
   "author": "",
