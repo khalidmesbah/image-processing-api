@@ -17,9 +17,9 @@ Advanced Full-Stack Web Development Nanodegree Program
     npm run start:prod
 ```
 
-## 
+## prettify
 ```
-
+    npm run prettier
 ```
 
 ## 
