@@ -1,20 +1,15 @@
 {
   "name": "image-processing-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Image Processing API Using Sharp",
   "main": "./src/script.ts",
   "scripts": {
-    "start": "nodemon ./server.js",
-    "start:prod": "npm run build && node dist/script.js",
     "build": "npx tsc",
-    "dev": "nodemon ./dist/script.js",
-    "lint": "eslint script.ts",
-    "lint:fix": "eslint --fix",
-    "test": "npx tsc && jasmine",
-    "format": "prettier --write './src/script.ts'"
+    "start": "node ./dist/script.js",
+    "start:prod": "npm run build && node ./dist/script.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Khalid Mesbah",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.13",
@@ -22,19 +17,21 @@
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^4.0.2",
+    "jasmine-spec-reporter": "^7.0.0",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
     "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "lint": "eslint ./dist/script.js",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './src/script.ts'"
   },
   "dependencies": {
     "@types/sharp": "^0.29.5",
-    "body-parser": "^1.19.2",
     "express": "^4.17.2",
-    "jasmine": "^4.0.2",
-    "jasmine-spec-reporter": "^7.0.0",
     "sharp": "^0.30.1",
     "supertest": "^6.2.2"
   }
