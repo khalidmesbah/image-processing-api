@@ -1,15 +1,22 @@
+import { stringify } from "querystring";
 import sharp from "sharp";
+interface resizedImage {
+  image: string,
+  width:number;
+  height:number;
+}
 
-const resizer = (image: string, width: number, height: number) => {
-  console.log(`from resize`, image, width, height);
-  sharp(`./images/${image}`)
+const resizer = async (
+  image: string,
+  width: number,
+  height: number
+): Promise<resizedImage> => {
+  return sharp(`./images/${image}`)
     .resize(width, height)
-    .toFile(
-      `./resized_images/${image.slice(0, -4)}_${width}_${height}.jpg`,
-      function (err) {
-        console.error(err);
-      }
-    );
+    .toFile(`./resized_images/${image.slice(0, -4)}_${width}_${height}.jpg`)
+    .then(() => {
+      return { "image": `${image.slice(0, -4)}`, "width": width, "height": height } ;
+    });
 };
 
 export default resizer;

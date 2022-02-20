@@ -9,23 +9,27 @@
   <body>
     <h1>image resizer</h1>
 
-    <form action="http://localhost:3000/api/resize" method="get" target="_blank">
+    <form
+      action="http://localhost:3000/api/resize"
+      method="get"
+      target="_blank"
+    >
       <div>
         <label for="image">choose the image: </label>
-        <input type="file" name="image" id="image" value="./images/encenadaport.jpg" />
+        <input type="file" name="image" id="image" />
       </div>
-      <br>    
+      <br />
       <div>
         <label for="height">choose the height: </label>
-        <input type="number" name="height" id="height" value="200"/>
+        <input type="number" name="height" id="height" value="200" />
       </div>
-      <br>
+      <br />
       <div>
         <label for="width">choose the width: </label>
-        <input type="number" name="width" id="width" value="224"/>
+        <input type="number" name="width" id="width" value="224" />
       </div>
-      <br>
-      <input type="submit" >
+      <br />
+      <input type="submit" />
     </form>
   </body>
 </html>
