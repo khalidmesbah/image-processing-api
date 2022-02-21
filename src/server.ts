@@ -1,8 +1,8 @@
 // import express module
 import express, { Application, Request, Response } from "express";
 
-// import our routes
-import router from "./routes/routes";
+// import our route
+import router from "./routes/route";
 
 // define the port
 const PORT = process.env.PORT || 3000;

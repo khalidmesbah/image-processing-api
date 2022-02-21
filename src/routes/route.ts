@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import resizer from "../utilities/resize";
+import resizer from "../utilities/resizer";
 import path from "path";
 
 const resized_images: string[] = [];
