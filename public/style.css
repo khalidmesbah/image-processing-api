@@ -1,0 +1,170 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: Raleway;
+  color: white;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+
+form {
+  border: 5px solid #123c05;
+  width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: black;
+  -webkit-box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+}
+
+form h1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 80px;
+  font-size: 20px;
+  font-weight: bold;
+  background: #27ae60;
+  border-radius: 10px 10px 0 0;
+}
+
+form .form-body {
+  padding: 10px;
+}
+
+form .form-body .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+form .form-body .row input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100%;
+  margin: 0 15px;
+  height: 35px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  background: #27ae61;
+  color: #ffffff;
+}
+
+form .rule {
+  height: 2px;
+  background: #e8ebed;
+  margin: 0px 35px;
+}
+
+form .form-footer {
+  margin: 0 25px 15px 25px;
+  padding: 15px 10px;
+}
+
+form .form-footer .button-30 {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #27ae61;
+  border-radius: 4px;
+  border-width: 0;
+  -webkit-box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+          box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  -webkit-transition: -webkit-box-shadow 0.15s, -webkit-transform 0.15s;
+  transition: -webkit-box-shadow 0.15s, -webkit-transform 0.15s;
+  transition: box-shadow 0.15s, transform 0.15s;
+  transition: box-shadow 0.15s, transform 0.15s, -webkit-box-shadow 0.15s, -webkit-transform 0.15s;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 18px;
+}
+
+form .form-footer .button-30:focus {
+  -webkit-box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+          box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+}
+
+form .form-footer .button-30:hover {
+  -webkit-box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+          box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+}
+
+form .form-footer .button-30:active {
+  -webkit-box-shadow: #d6d6e7 0 3px 7px inset;
+          box-shadow: #d6d6e7 0 3px 7px inset;
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
+}
+
+canvas {
+  position: absolute;
+  z-index: -1;
+}
+/*# sourceMappingURL=style.css.map */

@@ -16,6 +16,8 @@ app.set("view engine", "ejs");
 // add the router
 app.use("/api", router);
 
+// use static files
+app.use(express.static("public"));
 // render the main page
 app.get("/", (req: Request, res: Response) =>
   res.render("./../views/index.ejs")

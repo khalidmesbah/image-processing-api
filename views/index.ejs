@@ -1,35 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>image resizer</h1>
 
-    <form
-      action="http://localhost:3000/api/resize"
-      method="get"
-      target="_blank"
-    >
-      <div>
-        <label for="image">choose the image: </label>
-        <input type="file" name="image" id="image" required/>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- pretend to be in the public folder -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+
+  <form action="http://localhost:3000/api/resize" method="get" target="_blank">
+    <h1>Image Resizer</h1>
+    <div class="form-body">
+      <div class="row">
+        <input type="number" name="width" id="width" placeholder="choose the width" value="1200" required/>
+        <input type="number" name="height" id="height" placeholder="choose the height" value="600" required/>
       </div>
-      <br />
-      <div>
-        <label for="height">choose the height: </label>
-        <input type="number" name="height" id="height" value="600" />
+      <div class="row">
+        <input type="file" name="image" id="image" placeholder="choose the image" required />
       </div>
-      <br />
-      <div>
-        <label for="width">choose the width: </label>
-        <input type="number" name="width" id="width"  value="1200" />
-      </div>
-      <br />
-      <input type="submit" />
-    </form>
-  </body>
+    </div>
+    <div class="rule"></div>
+    <div class="form-footer">
+      <input type="submit" class="button-30" />
+    </div>
+  </form>
+
+  <script>const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.outerWidth;
+    canvas.height = window.outerHeight;
+
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const fontSize = 16;
+    const texts = "ABCDEFGHIJKLMNOPQRSTUVXYZ".split("");
+    const columnCount = Math.ceil(canvas.width / fontSize);
+    const rowCount = Math.ceil(canvas.height / fontSize);
+
+    const rowStatus = [];
+    for (let i = 0; i < columnCount; i++) {
+      rowStatus[i] = Math.floor(Math.random() * rowCount) * -1;
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgba(0,0,0,0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const text = texts[Math.floor(Math.random() * texts.length)];
+      rowStatus.forEach((row, column) => {
+        ctx.fillStyle = "#48f613";
+        ctx.fillText(text, column * fontSize, row * fontSize);
+
+        rowStatus[column] += 1;
+        if (rowStatus[column] > rowCount) {
+          rowStatus[column] = 0;
+        }
+      });
+    }
+
+    setInterval(draw, 100);
+  </script>
+</body>
+
 </html>
