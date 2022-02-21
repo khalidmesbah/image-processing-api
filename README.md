@@ -12,7 +12,7 @@ Advanced Full-Stack Web Development Nanodegree Program
     npm run start
 ```
 
-## build and rund
+## build and run
 ```
     npm run start:prod
 ```
@@ -36,3 +36,15 @@ Advanced Full-Stack Web Development Nanodegree Program
 ```
 
 ```
+
+
+
+## tooling
+- ejs
+- express
+- javascript
+- typescript
+- node.js
+- git
+- typescript
+- npm
