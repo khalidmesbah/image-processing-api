@@ -11,7 +11,7 @@
     "lint": "eslint ./dist/script.js",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './src/script.ts'",
-    "prettier": "prettier --config  .prettierrc './dist/**/*.js' --write "
+    "prettier": "prettier --config  .prettierrc './**' --write "
   },
   "keywords": [],
   "author": "Khalid Mesbah",

@@ -1,1 +1,6 @@
 node_modules/
+public/
+spec/
+views/
+.gitignore
+.prettierignore
