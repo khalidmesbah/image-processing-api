@@ -3,7 +3,7 @@ import resizer from "../utilities/resizer";
 import path from "path";
 
 const resized_images: string[] = [];
-const isResized = (image: string, width: number, height: number) => {
+const isResized = (image: string, width: number, height: number): boolean => {
   for (let i = 0; i < resized_images.length; i++)
     if (resized_images[i] === `${image}_${width}_${height}.jpg`) return true;
   return false;
@@ -11,7 +11,7 @@ const isResized = (image: string, width: number, height: number) => {
 const router = express.Router();
 let image: string, width: number, height: number;
 
-router.get("/resize", (req: Request, res: Response) => {
+router.get("/resize", (req: Request, res: Response): void => {
   image = (req.query.image as unknown as string).slice(0, -4);
   width = Math.abs(parseInt(req.query.width as string));
   height = Math.abs(parseInt(req.query.height as string));
@@ -24,7 +24,7 @@ router.get("/resize", (req: Request, res: Response) => {
     );
   } else {
     resized_images.push(`${image}_${width}_${height}.jpg`);
-    const sendImage = async () => {
+    const sendImage = async (): Promise<void> => {
       try {
         await resizer(image, width, height).then(async (e) => {
           res.sendFile(
