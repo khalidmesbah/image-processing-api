@@ -13,7 +13,7 @@ const router = express.Router();
 let image: string, width: number, height: number;
 
 router.get("/resize", (req: Request, res: Response) => {
-  image = (req.query.image as string) || "";
+  image = req.query.image as unknown as string;
   width = parseInt(req.query.width as string);
   height = parseInt(req.query.height as string);
   if (isResized(image, width, height)) {

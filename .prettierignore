@@ -2,6 +2,7 @@ node_modules/
 public/images
 public/resized_images
 spec/
+dist/
 views/
 .gitignore
 .prettierignore

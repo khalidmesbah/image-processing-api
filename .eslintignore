@@ -1,0 +1,8 @@
+node_modules/
+public/
+views/
+spec/
+dist/
+.gitignore
+.prettierignore
+.prettierrc
