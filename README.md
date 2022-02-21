@@ -56,3 +56,5 @@ Advanced Full-Stack Web Development Nanodegree Program
 - git
 - typescript
 - npm
+- sharp module
+- 

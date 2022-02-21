@@ -8,9 +8,8 @@
     "start": "node ./dist/script.js",
     "dev": "nodemon --watch ts-node ./src/script.ts ",
     "start:prod": "npm run build && node ./dist/script.js",
-    "lint": "eslint ./dist/script.js",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --write './src/script.ts'",
+    "lint": "eslint './dist/*.js'",
+    "lint:fix": "eslint --fix './dist/*.js'",
     "prettier": "prettier --config  .prettierrc './**' --write "
   },
   "keywords": [],
