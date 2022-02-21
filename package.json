@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node ./dist/script.js",
+    "dev": "nodemon --watcts-node ./src/script.ts ",
     "start:prod": "npm run build && node ./dist/script.js",
     "lint": "eslint ./dist/script.js",
     "lint:fix": "eslint --fix",
