@@ -11,16 +11,12 @@ const resizer = async (
   width: number,
   height: number
 ): Promise<resizedImage> => {
-  return sharp(`./public/images/${image}`)
-    .resize(Math.abs(width), Math.abs(height))
-    .toFile(
-      `./public/resized_images/${image.slice(0, -4)}_${width}_${height}.jpg`
-    )
-    .catch((err) => {
-      console.error(err);
-    })
+  return sharp(`./public/images/${image}.jpg`)
+    .resize(width, height)
+    .toFile(`./public/resized_images/${image}_${width}_${height}.jpg`)
+    .catch((err) => console.error(err))
     .then(() => {
-      return { image: `${image.slice(0, -4)}`, width: width, height: height };
+      return { image: `${image}`, width: width, height: height };
     });
 };
 
