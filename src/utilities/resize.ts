@@ -16,6 +16,9 @@ const resizer = async (
     .toFile(
       `./public/resized_images/${image.slice(0, -4)}_${width}_${height}.jpg`
     )
+    .catch((err) => {
+      console.error(err);
+    })
     .then(() => {
       return { image: `${image.slice(0, -4)}`, width: width, height: height };
     });
