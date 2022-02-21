@@ -1,5 +1,5 @@
 // import express module
-import express, { Application, Response } from "express";
+import express, { Application, Request, Response } from "express";
 
 // import our routes
 import router from "./routes/index";
@@ -17,10 +17,14 @@ app.set("view engine", "ejs");
 app.use("/api", router);
 
 // render the main page
-app.get("/", (res: Response) => res.render("./../views/index.ejs"));
+app.get("/", (req: Request, res: Response) =>
+  res.render("./../views/index.ejs")
+);
 
 // render the error page
-app.use((res: Response) => res.status(404).render("./../views/404.ejs"));
+app.use((req: Request, res: Response) =>
+  res.status(404).render("./../views/404.ejs")
+);
 
 // run the server
 app.listen(PORT, () => {
