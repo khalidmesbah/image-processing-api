@@ -25,14 +25,18 @@ router.get("/resize", (req: Request, res: Response) => {
   } else {
     resized_images.push(`${image}_${width}_${height}.jpg`);
     const sendImage = async () => {
-      await resizer(image, width, height).then(async (e) => {
-        res.sendFile(
-          path.join(
-            __dirname,
-            `../../public/resized_images/${e.image}_${e.width}_${e.height}.jpg`
-          )
-        );
-      });
+      try {
+        await resizer(image, width, height).then(async (e) => {
+          res.sendFile(
+            path.join(
+              __dirname,
+              `../../public/resized_images/${e.image}_${e.width}_${e.height}.jpg`
+            )
+          );
+        });
+      } catch (error) {
+        console.log(error);
+      }
     };
     sendImage();
   }
