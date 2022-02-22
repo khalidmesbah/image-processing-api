@@ -28,33 +28,28 @@ Advanced Full-Stack Web Development Nanodegree Program
     npm run prettier
 ```
 
+## lint
+
+```
+    npm run lint
+```
+
+## test
+
+```
+    npm run test
+```
+
 ##
 
 ```
 
 ```
 
-##
 
-```
-
-```
-
-##
-
-```
-
-```
-
-## tooling
-
-- ejs
-- express
-- javascript
-- typescript
-- node.js
-- git
-- typescript
-- npm
-- sharp module
-- 
+## Project Stack
+- Run Time Environment: Node.js
+- Languages: JavaScript & TypeScript
+- Testing: jasmine
+- Modules/Packages: Sharp package
+- Frameworks: Express & Ejs
