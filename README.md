@@ -48,8 +48,16 @@ Advanced Full-Stack Web Development Nanodegree Program
 
 
 ## Project Stack
-- Run Time Environment: Node.js
+- Run Time Environment: node.js
 - Languages: JavaScript & TypeScript
-- Testing: jasmine
-- Modules/Packages: Sharp package
-- Frameworks: Express & Ejs
+- Unit Testing: jasmine
+- End Point Testing : jasmine & supertest
+- Modules/Packages: sharp package 
+- Frameworks: express & ejs
+- Linting : esLint
+- Fromatting : prettier
+## Feautures
+- Unit Testing
+- Linting
+- Formating
+- Typescript

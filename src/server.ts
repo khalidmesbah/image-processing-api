@@ -24,6 +24,12 @@ app.get("/", (req: Request, res: Response) =>
   res.render("./../views/index.ejs")
 );
 
+// test
+app.get("/test", (req: Request, res: Response) => {
+  res.json({ message: "pass!" });
+  res.send("hello");
+});
+
 // render the error page
 app.use((req: Request, res: Response) =>
   res.status(404).render("./../views/404.ejs")
@@ -33,3 +39,6 @@ app.use((req: Request, res: Response) =>
 app.listen(PORT, () => {
   console.log(`the server is running on port http://localhost:${PORT}`);
 });
+
+// export the application object to test the endpoints
+export default app;

@@ -1,5 +1,4 @@
-import add from "../utilities/add";
-import resizer from "../utilities/resizer";
+import resizer from "../../utilities/resizer";
 
 it("expect resizer(`test`, 200, 200) to equal { image: `test`, width: 200, height: 200 }", async () => {
   try {
@@ -8,8 +7,4 @@ it("expect resizer(`test`, 200, 200) to equal { image: `test`, width: 200, heigh
   } catch (error) {
     console.log(error);
   }
-});
-
-it(`expect add(1,2) to equal 3`, () => {
-  expect(add(1, 2)).toEqual(3);
 });

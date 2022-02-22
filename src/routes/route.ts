@@ -35,7 +35,7 @@ router.get("/resize", (req: Request, res: Response): void => {
           );
         });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     sendImage();
