@@ -2,6 +2,12 @@
 
 Advanced Full-Stack Web Development Nanodegree Program
 
+## Functionalities
+- resizer : to resize an image
+- isResized : to check wheather the image is resized or not
+## End points
+- /api/resize?image=imageName&width:theWidth&height:theWidth : the api that is responsible for resizing the image
+
 ## Scripts
 
 ### build
