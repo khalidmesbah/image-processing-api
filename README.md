@@ -14,37 +14,37 @@ Advanced Full-Stack Web Development Nanodegree Program
 
 > ## Scripts
 
-### build => to compile typescript
+### build : to compile typescript
 
 ` 
     npm run build
 `
 
-### run => to run the server
+### run : to run the server
 
 ` 
     npm run start
 `
 
-### build and run => to compile typescript and run the server 
+### build and run : to compile typescript and run the server 
 
 ` 
     npm run start:prod
 `
 
-### prettify => to format the code
+### prettify : to format the code
 
 ` 
     npm run prettier
 `
 
-### lint => to accelerate development and reduce errors
+### lint : to accelerate development and reduce errors
 
 ` 
     npm run lint
 `
 
-### test => to test our code        
+### test : to test our code        
 
 ` 
     npm run test
