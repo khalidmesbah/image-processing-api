@@ -2,45 +2,45 @@
 
 Advanced Full-Stack Web Development Nanodegree Program
 
-# Scripts
+## Scripts
 
-## build
+### build
 
 ```
     npm run build
 ```
 
-## run
+### run
 
 ```
     npm run start
 ```
 
-## build and run
+### build and run
 
 ```
     npm run start:prod
 ```
 
-## prettify
+### prettify
 
 ```
     npm run prettier
 ```
 
-## lint
+### lint
 
 ```
     npm run lint
 ```
 
-## test
+### test
 
 ```
     npm run test
 ```
 
-##
+###
 
 ```
 
