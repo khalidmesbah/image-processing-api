@@ -3,6 +3,7 @@ import resizer from "../utilities/resizer";
 import isResized from "../utilities/isResized";
 import path from "path";
 
+// i used an array for chaching , is there a better way?
 const resized_images: string[] = [];
 
 const router = express.Router();
@@ -13,8 +14,6 @@ router.get("/resize", (req: Request, res: Response): void => {
   const height = Math.abs(parseInt(req.query.height as string));
 
   if (isResized(image, width, height, resized_images)) {
-    console.log(`resized`);
-
     res.sendFile(
       path.join(
         __dirname,
@@ -23,7 +22,6 @@ router.get("/resize", (req: Request, res: Response): void => {
     );
   } else {
     resized_images.push(`${image}_${width}_${height}.jpg`);
-    console.log(`not resized`);
     const sendImage = async (): Promise<void> => {
       try {
         await resizer(image, width, height).then(async (e) => {
