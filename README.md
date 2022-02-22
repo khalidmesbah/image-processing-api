@@ -16,39 +16,39 @@ Advanced Full-Stack Web Development Nanodegree Program
 
 ### build => to compile typescript
 
-``` bash
+` 
     npm run build
-```
+`
 
 ### run => to run the server
 
-``` bash
+` 
     npm run start
-```
+`
 
 ### build and run => to compile typescript and run the server 
 
-``` bash
+` 
     npm run start:prod
-```
+`
 
 ### prettify => to format the code
 
-``` bash
+` 
     npm run prettier
-```
+`
 
 ### lint => to accelerate development and reduce errors
 
-``` bash
+` 
     npm run lint
-```
+`
 
 ### test => to test our code        
 
-``` bash
+` 
     npm run test
-```
+`
 
 > ## Project Stack
 - Run Time Environment: node.js
@@ -69,5 +69,3 @@ Advanced Full-Stack Web Development Nanodegree Program
 5. [ ] Create a front-end for uploading more images to the full-size directory.
 6. [x] Create a front-end that displays a thumbnail directory.
 7. [ ] Create a front-end that allows for the selection of how to process a selected image.
-
-// did i do #2 and #6 right ?
