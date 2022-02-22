@@ -5,6 +5,8 @@ Advanced Full-Stack Web Development Nanodegree Program
 > ## Functionalities
 - resizer : to resize an image
 - isResized : to check wheather the image is resized or not
+- Modify the thumbnail filename to include the image size to allow for multiple sizes of the same image.
+- Create a front-end that displays a thumbnail directory.
 
 
 > ## End points
