@@ -14,7 +14,7 @@ const app: Application = express();
 app.set("view engine", "ejs");
 
 // add the router
-app.use("/resize", router);
+app.use("/api", router);
 
 // use static files
 app.use(express.static("public"));
