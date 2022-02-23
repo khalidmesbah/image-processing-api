@@ -1,4 +1,4 @@
-aa# Image-Processing-API
+# Image-Processing-API
 
 Advanced Full-Stack Web Development Nanodegree Program
 
