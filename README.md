@@ -1,4 +1,4 @@
-# Image-Processing-API
+aa# Image-Processing-API
 
 Advanced Full-Stack Web Development Nanodegree Program
 
@@ -13,34 +13,33 @@ Advanced Full-Stack Web Development Nanodegree Program
 
    usage
 
-   <http://localhost:3000/> 
+   <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a> 
 
 2. `/api/resize` : the endpoint that is responsible for resizing the image
 
    usage
 
-   <http://localhost:3000/api/resize?width=theWidth&height=theHeight&image=imageName> 
+   <a href="http://localhost:3000/api/resize?width=theWidth&height=theHeight&image=imageName" target="_blank">http://localhost:3000/api/resize?width=theWidth&height=theHeight&image=imageName</a>
 
    example
 
-   <http://localhost:3000/api/resize?width=1200&height=600&image=fjord.jpg>
+   <a href="http://localhost:3000/api/resize?width=1200&height=600&image=fjord.jpg" target="_blank">http://localhost:3000/api/resize?width=1200&height=600&image=fjord.jpg</a>
 
 3. `api/images` : the endpoint that is responsible for displaying the available images
 
-   <http://localhost:3000/api/images>
+   <a href="http://localhost:3000/api/images" target="_blank">http://localhost:3000/api/images</a>
 
 4. `api/image/:id` : the endpoint that is responsible for displaying a specific image
 
-   <http://localhost:3000/api/image/1>
+   <a href="http://localhost:3000/api/image/1" target="_blank">http://localhost:3000/api/image/1</a>
 
-   <http://localhost:3000/api/image/5> 
+   <a href="http://localhost:3000/api/image/5" target="_blank">http://localhost:3000/api/image/5</a>
 
-   <http://localhost:3000/api/image/8> 
+   <a href="http://localhost:3000/api/image/8" target="_blank">http://localhost:3000/api/image/8</a>
 
-   <http://localhost:3000/api/image/0> 
+   <a href="http://localhost:3000/api/image/0" target="_blank">http://localhost:3000/api/image/0</a>
 
-   <http://localhost:3000/api/image> 
-
+   <a href="http://localhost:3000/api/image" target="_blank">http://localhost:3000/api/image</a>
 
 
 > ## Scripts
