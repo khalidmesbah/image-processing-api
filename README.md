@@ -8,13 +8,39 @@ Advanced Full-Stack Web Development Nanodegree Program
 - Create a front-end that displays a thumbnail directory.
 
 
-> ## End points
-1. Homepage endpoint :`/` : the endpoint that is responsible for displaying the home page
+> ## Endpoints
+1. `/` : the endpoint that is responsible for displaying the home page
+
+   usage
 
    http://localhost:3000/ 
-3. Resize endpoint : `/resize` : the endpoint that is responsible for resizing the image
 
-   http://localhost:3000/resize?width=theWidth&height=theHeight&image=imageName 
+2. `/api/resize` : the endpoint that is responsible for resizing the image
+
+   usage
+
+   http://localhost:3000/api/resize?width=theWidth&height=theHeight&image=imageName 
+
+   example
+
+   http://localhost:3000/api/resize?width=200&height=200&image=fjord.jpg 
+
+3. `api/images` : the endpoint that is responsible for displaying the images
+
+   http://localhost:3000/api/images
+
+4. `api/image/:id` : the endpoint that is responsible for displaying a specific image
+
+   http://localhost:3000/api/image/1 
+
+   http://localhost:3000/api/image/5 
+
+   http://localhost:3000/api/image/8 
+
+   http://localhost:3000/api/image/0 
+
+   http://localhost:3000/api/image 
+
 
 
 > ## Scripts
