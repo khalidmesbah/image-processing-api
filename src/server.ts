@@ -14,21 +14,15 @@ const app: Application = express();
 app.set("view engine", "ejs");
 
 // add the router
-app.use("/api", router);
+app.use("/resize", router);
 
 // use static files
 app.use(express.static("public"));
 
-// render the main page
+// render the home page
 app.get("/", (req: Request, res: Response) =>
   res.render("./../views/index.ejs")
 );
-
-// test
-app.get("/test", (req: Request, res: Response) => {
-  res.json({ message: "pass!" });
-  res.send("hello");
-});
 
 // render the error page
 app.use((req: Request, res: Response) =>
