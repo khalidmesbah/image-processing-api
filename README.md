@@ -7,7 +7,6 @@ Advanced Full-Stack Web Development Nanodegree Program
 - Modify the thumbnail filename to include the image size to allow for multiple sizes of the same image.
 - Create a front-end that displays a thumbnail directory.
 
-
 > ## Endpoints
 1. `/` : the endpoint that is responsible for displaying the home page
 
@@ -95,7 +94,6 @@ Advanced Full-Stack Web Development Nanodegree Program
 - Template engines : ejs
 - Linting: esLint
 - Fromatting: prettier
-
 
 > ## Suggestions to Make Your Project Stand Out!
 1. [ ] Add additional processing to accept and output other image formats than JPG.
