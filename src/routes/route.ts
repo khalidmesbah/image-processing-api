@@ -33,7 +33,7 @@ router.get("/resize", async (req: Request, res: Response): Promise<void> => {
       fs.existsSync(
         path.join(
           __dirname,
-          `/public/resized_images/`,
+          `../../public/resized_images`,
           `${image}_${width}_${height}.jpg`
         )
       )
