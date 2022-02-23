@@ -13,33 +13,33 @@ Advanced Full-Stack Web Development Nanodegree Program
 
    usage
 
-   http://localhost:3000/ 
+   <http://localhost:3000/> 
 
 2. `/api/resize` : the endpoint that is responsible for resizing the image
 
    usage
 
-   http://localhost:3000/api/resize?width=theWidth&height=theHeight&image=imageName 
+   <http://localhost:3000/api/resize?width=theWidth&height=theHeight&image=imageName> 
 
    example
 
-   http://localhost:3000/api/resize?width=1200&height=600&image=fjord.jpg
+   <http://localhost:3000/api/resize?width=1200&height=600&image=fjord.jpg>
 
 3. `api/images` : the endpoint that is responsible for displaying the available images
 
-   http://localhost:3000/api/images
+   <http://localhost:3000/api/images>
 
 4. `api/image/:id` : the endpoint that is responsible for displaying a specific image
 
-   http://localhost:3000/api/image/1 
+   <http://localhost:3000/api/image/1>
 
-   http://localhost:3000/api/image/5 
+   <http://localhost:3000/api/image/5> 
 
-   http://localhost:3000/api/image/8 
+   <http://localhost:3000/api/image/8> 
 
-   http://localhost:3000/api/image/0 
+   <http://localhost:3000/api/image/0> 
 
-   http://localhost:3000/api/image 
+   <http://localhost:3000/api/image> 
 
 
 
