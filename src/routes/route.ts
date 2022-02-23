@@ -30,6 +30,11 @@ router.get("/resize", async (req: Request, res: Response): Promise<void> => {
   } else {
     image = image.slice(0, -4);
     if (
+      !fs.existsSync(path.join(__dirname, `../../public`, `/resized_images`))
+    ) {
+      fs.promises.mkdir(path.join(__dirname, `../../public/resized_images`));
+    }
+    if (
       fs.existsSync(
         path.join(
           __dirname,
