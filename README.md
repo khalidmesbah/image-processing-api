@@ -23,9 +23,9 @@ Advanced Full-Stack Web Development Nanodegree Program
 
    example
 
-   http://localhost:3000/api/resize?width=200&height=200&image=fjord.jpg 
+   http://localhost:3000/api/resize?width=1200&height=600&image=fjord.jpg
 
-3. `api/images` : the endpoint that is responsible for displaying the images
+3. `api/images` : the endpoint that is responsible for displaying the available images
 
    http://localhost:3000/api/images
 

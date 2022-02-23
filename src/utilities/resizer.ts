@@ -12,15 +12,18 @@ const resizer = async (
   width: number,
   height: number
 ): Promise<resizedImage> => {
-  return await sharp(path.join(__dirname, `../../public/images/${image}.jpg`))
+  return await sharp(
+    path.join(__dirname, `../../public/images/`, `${image}.jpg`)
+  )
     .resize(width, height)
     .toFile(
       path.join(
         __dirname,
-        `../../public/resized_images/${image}_${width}_${height}.jpg`
+        `../../public/resized_images/`,
+        `${image}_${width}_${height}.jpg`
       )
     )
-    .catch((err) => {
+    .catch(err => {
       throw err;
     })
     .then(() => {

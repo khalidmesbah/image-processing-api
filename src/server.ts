@@ -1,6 +1,6 @@
 // import express module
 import express, { Application, Request, Response } from "express";
-
+import path from "path";
 // import our route
 import router from "./routes/route";
 
@@ -17,16 +17,16 @@ app.set("view engine", "ejs");
 app.use("/api", router);
 
 // use static files
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // render the home page
 app.get("/", (req: Request, res: Response) =>
-  res.render("./../views/index.ejs")
+  res.render(path.resolve(__dirname, `../views`, `index.ejs`))
 );
 
 // render the error page
 app.use((req: Request, res: Response) =>
-  res.status(404).render("./../views/404.ejs")
+  res.status(404).render(path.join(__dirname, "../views", "404.ejs"))
 );
 
 // run the server

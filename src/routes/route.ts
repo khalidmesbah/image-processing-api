@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 
 const availableImages: string[] = [];
-fs.readdirSync(path.join(__dirname, `../../public/images`)).forEach((image) => {
+fs.readdirSync(path.join(__dirname, `../../public/images`)).forEach(image => {
   availableImages.push(image);
 });
 
@@ -33,7 +33,8 @@ router.get("/resize", async (req: Request, res: Response): Promise<void> => {
       fs.existsSync(
         path.join(
           __dirname,
-          `/public/resized_images/${image}_${width}_${height}.jpg`
+          `/public/resized_images/`,
+          `${image}_${width}_${height}.jpg`
         )
       )
     ) {
@@ -46,7 +47,7 @@ router.get("/resize", async (req: Request, res: Response): Promise<void> => {
       );
     } else {
       try {
-        await resizer(image, width, height).then(async (e) => {
+        await resizer(image, width, height).then(async e => {
           res.sendFile(
             path.join(
               __dirname,
