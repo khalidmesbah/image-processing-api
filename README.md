@@ -103,6 +103,6 @@ Advanced Full-Stack Web Development Nanodegree Program
 3. [ ] Further explore the options in the Sharp module and add additional processing options.
 4. [ ] Add in logging to record when images are processed or accessed.
 5. [ ] Create a front-end for uploading more images to the full-size directory.
-6. [x] Create a front-end that displays a thumbnail directory.
+6. [ ] Create a front-end that displays a thumbnail directory.
 7. [ ] Create a front-end that allows for the selection of how to process a selected image.
 8. [ ] make a logger middleware
