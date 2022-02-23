@@ -20,7 +20,9 @@ const resizer = async (
         `../../public/resized_images/${image}_${width}_${height}.jpg`
       )
     )
-    .catch((err) => console.error(err))
+    .catch((err) => {
+      throw err;
+    })
     .then(() => {
       return { image: `${image}`, width: width, height: height };
     });

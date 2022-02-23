@@ -15,7 +15,8 @@ router.get("/resize", async (req: Request, res: Response): Promise<void> => {
   let image = req.query.image as unknown as string;
   const width = Math.abs(parseInt(req.query.width as string));
   const height = Math.abs(parseInt(req.query.height as string));
-  // make sure the parameters values are correct otherwise redirect the error page
+
+  // make sure the parameters are correct otherwise send error messages
   if (
     typeof req.query.width === `undefined` ||
     typeof req.query.height === `undefined` ||
@@ -24,7 +25,7 @@ router.get("/resize", async (req: Request, res: Response): Promise<void> => {
     res.send(`Missing filename, height or width.`);
   } else if (!availableImages.includes(image)) {
     res.send(`Invalid input for imagename`);
-  } else if (width <= 0 || height <= 0) {
+  } else if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
     res.send(`Invalid input for height or width`);
   } else {
     image = image.slice(0, -4);
