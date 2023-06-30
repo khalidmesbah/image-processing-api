@@ -2,15 +2,15 @@
   "name": "image-processing-api",
   "version": "2.0.0",
   "description": "Image Processing API Using Sharp",
-  "main": "./src/server.ts",
+  "main": "dist/server.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node ./dist/server.js",
-    "start:prod": "npm run build && node ./dist/server.js",
-    "dev": "nodemon --watch ts-node ./src/server.ts ",
-    "lint": "eslint './src/*.ts'",
-    "lint:fix": "eslint --fix './src/**/*.ts'",
-    "prettier": "prettier --config  .prettierrc './src/**/*.ts' --write ",
+    "start": "node dist/server.js",
+    "start:prod": "npm run build && npm run start",
+    "dev": "nodemon --watch ts-node src/server.ts ",
+    "lint": "eslint 'src/*.ts'",
+    "lint:fix": "eslint --fix 'src/**/*.ts'",
+    "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "jasmine": "jasmine",
     "test": "npm run build && npm run jasmine"
   },
@@ -24,7 +24,8 @@
     "jasmine",
     "prettier",
     "eslint",
-    "ejs"
+    "ejs",
+    "supertest"
   ],
   "author": "Khalid Mesbah",
   "license": "ISC",
@@ -32,10 +33,11 @@
     "@types/express": "^4.17.13",
     "@types/jasmine": "^3.10.3",
     "@types/node": "^17.0.18",
+    "@types/sharp": "^0.29.5",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
-    "@types/sharp": "^0.29.5",
+    "ejs": "^3.1.9",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -48,7 +50,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "ejs": "^3.1.6",
+    "dotenv": "^16.3.1",
     "express": "^4.17.2",
     "sharp": "^0.30.1"
   }

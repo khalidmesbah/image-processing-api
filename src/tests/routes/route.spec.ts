@@ -8,6 +8,6 @@ describe(`testing the resize endpoint`, () => {
     const res = await request.get(
       "/api/resize?width=1200&height=600&image=fjord.jpg"
     );
-    expect(res.statusCode).toBe(200);
+    expect(res.status).toBe(200);
   });
 });
