@@ -7,18 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Image Processing API</title>
   <!-- pretend to be in the public folder -->
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
   <canvas id="canvas"></canvas>
 
-  <form action="http://localhost:<%= PORT %>/api/resize" method="get" target="_blank">
+  <form action="http://localhost:<%= PORT %>/api/resize" method="post" target="_blank" enctype="multipart/form-data" id="form">
     <h1>Image Resizer</h1>
     <div class="form-body">
       <div class="row">
-        <input type="number" name="width" id="width" placeholder="choose the width" value="1200" required/>
-        <input type="number" name="height" id="height" placeholder="choose the height" value="600" required/>
+        <input type="number" name="width" id="width" placeholder="choose the width" value="200" required />
+        <input type="number" name="height" id="height" placeholder="choose the height" value="200" required />
       </div>
       <div class="row">
         <input type="file" name="image" id="image" placeholder="choose the image" required />
@@ -26,11 +26,26 @@
     </div>
     <div class="rule"></div>
     <div class="form-footer">
-      <input type="submit" class="button-30" value="Resize"/>
+      <button type="submit" class="button-30">Resize</button>
+      <button type="button" class="button-30" id="images">Images</button>
+      <button type="button" class="button-30" id="thumbnails">thumbnails</button>
     </div>
   </form>
 
-  <script>const canvas = document.querySelector("canvas");
+  <script>
+    const port = JSON.parse('<%- JSON.stringify(PORT) %>');
+    const baseUrl = `http://localhost:${port}/api/`;
+    const images = document.getElementById("images");
+    const thumbnails = document.getElementById("thumbnails");
+
+    const listImages = (resized) => {
+      document.location.href = baseUrl + (resized ? "thumbnails" : "images");
+    }
+
+    images.addEventListener("click", () => listImages(false));
+    thumbnails.addEventListener("click", () => listImages(true));
+
+    const canvas = document.querySelector("canvas");
     const ctx = canvas.getContext("2d");
 
     canvas.width = window.outerWidth;

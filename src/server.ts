@@ -1,25 +1,16 @@
-// import express module
-import express, { Application, Request, Response } from "express";
-
-// import the path module
+import express from "express";
 import path from "path";
-
-// import our route
 import router from "./routes/route";
-
-// import the environment variables
-import dotenv from "dotenv";
-
-// configure the environment variables
-dotenv.config();
-
-// define the port
-const PORT = process.env.PORT || 3003;
+import { PORT, statusCodes } from "./utilities/constants";
+import morgan from "morgan";
 
 // create the application object
-const app: Application = express();
+const app = express();
 
-// set ejs
+// HTTP request logger middleware
+app.use(morgan("tiny"));
+
+// Embedded JavaScript templates
 app.set("view engine", "ejs");
 
 // add the router
@@ -29,15 +20,17 @@ app.use("/api", router);
 app.use(express.static(path.join(__dirname, "../public")));
 
 // render the home page
-app.get("/", (_req: Request, res: Response) =>
+app.get("/", (_req, res) => {
   res
-    .status(200)
-    .render(path.resolve(__dirname, `../views`, `index.ejs`), { PORT })
-);
+    .status(statusCodes.OK)
+    .render(path.join(__dirname, `../views`, `index.ejs`), { PORT });
+});
 
 // render the error page
-app.use((_req: Request, res: Response) =>
-  res.status(404).render(path.join(__dirname, "../views", "404.ejs"))
+app.use((_req, res) =>
+  res
+    .status(statusCodes.NotFound)
+    .render(path.join(__dirname, "../views", "404.ejs"))
 );
 
 // create the webserver at the specified host and port

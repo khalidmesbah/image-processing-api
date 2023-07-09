@@ -43,6 +43,12 @@
 - `Tuple`: A data type of an array with a set number of values where all value types are known
 - `Behavior Driven Development`: A development style built on Test Driven Development where the focus is user interaction and stakeholders.
 - `Test-Driven Development`: A development style where tests are written before development
+- `Host`: the ip address of the machine
+- `Port`: the address of the server running on the machine
+- `GraphQL`: A query language used for working with APIs
+- `REST`:Representational State Transfer, a method for working with data.
+- `RESTful`: Term to describe an API that is implemented following REST principles. Often used interchangeably with REST (e.g. REST/RESTful APIs).
+- `Websocket API`: A type of stateful API that allows the server to know what the user is doing and vice versa
 
 ## Notes
 
@@ -67,6 +73,15 @@
 - Debugging and refactoring are as important as writing the initial code.
 - websites can have multiple services running on different ports
 - it's a convention to use a 4-digit number over 1024 for port numbers
+- website can have multiple services running on different ports
+- `Endpoint`: An endpoint is the **_URL_** of the **_REST API_** **_with_** the method that gets, adds to, or modifies the data of an API in some way
+- endpoint = the URL of the REST API + method
+- endpoint = method + route
+- testing endpoints = testing the method with the URL
+- it's best practice to keep the server and application endpoints and functionality separate.
+- With the router object, you're able to create a directory of routes and separate the functionality of each route onto its own file.
+- postman is and HTTP client
+- moving and renaming are the same thing in node's file system
 
 ## Process module
 
@@ -94,7 +109,7 @@
 JS is single-thread
 
 ### Types of code that will be running
->
+
 > there are only five types of statements in node.js
 
 1. Synchronous
@@ -145,15 +160,15 @@ The polling phase is a bit more complex than just adding to the poll queue.
 - exists in most programming languages
 - it's either implemented by a developer or inferred by a compiler
 - there are 2 types of typing
-    1. implicit: the type is inferred by the interpreter
-    2. explicit: the type is declared by the developer
+  1. implicit: the type is inferred by the interpreter
+  2. explicit: the type is declared by the developer
 - It is best practice to allow TypeScript to type immutable variables and simple functions implicitly.
 - Implicit Typing is a best practice when the app is self-contained (meaning that it does not depend on other applications or APIs) or variables are immutable.
 - unknown is better than any
 - null is typically only functionally found in union types
 - any is equivalent to not using types, unknown is better
 - typecasting/type assertion
-![type assertion](./typeAssertions.png)
+  ![type assertion](./typeAssertions.png)
 - type checking: use `typeof` to determine the type, If you run into a situation where you have an ambiguous function, and you don't know exactly what it's doing, or you're working with a third-party library, and type definitions are missing, and you quickly want to access the type, one way of doing so is using typeof. This won't work for every type, such as null returning an object, but it will work for most.
 
 ![type chekcing](./typeChecking.png)
@@ -170,8 +185,13 @@ The polling phase is a bit more complex than just adding to the poll queue.
 - tuple: the length is fixed
 - enum: used for set of predefined values
 
-  ``` ts
-  enum Compass { "north", "south", "east", "west"}
+  ```ts
+  enum Compass {
+    "north",
+    "south",
+    "east",
+    "west",
+  }
   // use PascalCase
   ```
 
@@ -185,22 +205,63 @@ The polling phase is a bit more complex than just adding to the poll queue.
 ### Pay attention to when to use Implicit vs Explicit typing
 
 - const
-Typing: Implicit
-kjValue is immutable so type can't be changed
+  Typing: Implicit
+  kjValue is immutable so type can't be changed
 
 - let
-Typing: Explicit
-Value and type can be changed
+  Typing: Explicit
+  Value and type can be changed
 
 - Function with controlled inputs
-Typing: Implicit
-Output is controlled and code is simpler
+  Typing: Implicit
+  Output is controlled and code is simpler
 
 - Single-line arrow function
-Typing: Implicit
-Simpler code
+  Typing: Implicit
+  Simpler code
 
 - Longer function
-Typing: Explicit
-Easier to read
+  Typing: Explicit
+  Easier to read
 
+## HTTP clients
+
+ex: postman
+
+## Working With Data
+
+- File System is one of the core node.js modules. It's a larger module and requires import for use.
+- async/await is available through the file system promises api
+- file system should be treated asynchronously
+- the file system module is the only core I/O module that allow for both synchronous and ayscnhronous file system calls
+- File System is almost entirely asynchronous by default, but there are some methods that are synchronous and should only be used when first opening a file such as wanting to have a file read before the rest of the code runs.
+
+### How to use the file system?
+
+- work with data
+- navigate to directories
+
+### Where do we get data?
+
+- application memory
+- external APIs
+- local storage
+- file system
+- database
+
+### What is the only core I/O module that allow for both synchronous and ayscnhronous file system calls
+
+- file system
+
+### Syncronous VS Asynchronous
+
+Syncronous calls only be used when setting up an application other wise use Asyncronous calls
+
+ex of when to use Syncronous calls:
+
+- creating an external configruation file that need to be loaded before the application is run
+
+### How to save data to an external file with node?
+
+1. file system
+2. database

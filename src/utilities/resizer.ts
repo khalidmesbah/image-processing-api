@@ -1,32 +1,38 @@
 import sharp from "sharp";
 import path from "path";
+import { imagesDirPath, thumbnailsDirPath } from "./constants";
 
-interface resizedImage {
-  image: string;
+interface thumbnail {
   width: number;
   height: number;
+  imageName: string;
+  imageExtension: string;
 }
 
 const resizer = async (
-  image: string,
   width: number,
-  height: number
-): Promise<resizedImage> => {
-  return await sharp(path.join(__dirname, `/public/images`, `${image}.jpg`))
-    .resize(width, height)
-    .toFile(
-      path.join(
-        __dirname,
-        `/public/resized_images`,
-        `${image}_${width}_${height}.jpg`
-      )
-    )
+  height: number,
+  imageName: string,
+  imageExtension: string
+): Promise<thumbnail> => {
+  const image = path.join(imagesDirPath, `${imageName}.${imageExtension}`);
+  const newImage = path.join(
+    thumbnailsDirPath,
+    `${imageName}_${width}x${height}.${imageExtension}`
+  );
+
+  return await sharp(image)
+    .resize(width, height, {
+      fit: "cover",
+      background: { r: 255, g: 255, b: 255 },
+      withoutEnlargement: true,
+    })
+    .flatten({ background: { r: 0, g: 255, b: 0 } })
+    .toFile(newImage)
     .catch(err => {
       throw err;
     })
-    .then(() => {
-      return { image, width, height };
-    });
+    .then(() => ({ width, height, imageName, imageExtension }));
 };
 
 export default resizer;

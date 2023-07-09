@@ -1,99 +1,265 @@
-import express, { Request, Response } from "express";
-import resizer from "../utilities/resizer";
+import express, { Response } from "express";
+import {
+  body,
+  matchedData,
+  param,
+  query,
+  validationResult,
+} from "express-validator";
+import fs from "fs-extra";
+import multer from "multer";
 import path from "path";
-import fs from "fs";
+import {
+  PORT,
+  images,
+  imagesDirPath,
+  listImagesDirPath,
+  supportedFormats,
+  syncImages,
+  syncThumbnails,
+  thumbnails,
+  thumbnailsDirPath,
+  statusCodes,
+} from "../utilities/constants";
+import resizer from "../utilities/resizer";
 
-const availableImages: string[] = [];
-fs.readdirSync(path.join(__dirname, `../../public/images`)).forEach(image => {
-  availableImages.push(image);
-});
+/* variables */
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      cb(null, imagesDirPath);
+    },
+    filename: async (_req, file, cb) => {
+      const isUploaded = await fs.pathExists(
+        path.join(imagesDirPath, file.originalname)
+      );
+      cb(null, isUploaded ? "placeholder" : file.originalname);
+    },
+  }),
+  fileFilter: (_req, file, cb) => {
+    const isSupportedFormat = supportedFormats
+      .map(f => `image/${f}`)
+      .includes(file.mimetype);
+    if (!isSupportedFormat) {
+      cb(
+        Error(
+          `You can upload only image files with one of the following formats: (jpg, jpeg, png, webp, tiff, avif, gif, svg)`
+        )
+      );
+    }
+    cb(null, true);
+  },
+}).single("image");
 
 const router = express.Router();
 
-// endpoint for resizing the image
-router.get("/resize", async (req: Request, res: Response): Promise<void> => {
-  let image = req.query.image as unknown as string;
-  const width = Math.abs(parseInt(req.query.width as string));
-  const height = Math.abs(parseInt(req.query.height as string));
-
-  // make sure the parameters are correct otherwise send error messages
+/* functions */
+const resize = async (
+  res: Response,
+  width: number,
+  height: number,
+  imageName: string,
+  imageExtension: string
+) => {
+  syncImages();
+  syncThumbnails();
   if (
-    typeof req.query.width === `undefined` ||
-    typeof req.query.height === `undefined` ||
-    typeof req.query.image === `undefined`
-  ) {
-    res.send(`Missing filename, height or width.`);
-  } else if (!availableImages.includes(image)) {
-    res.send(`Invalid input for imagename`);
-  } else if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
-    res.send(`Invalid input for height or width`);
-  } else {
-    image = image.slice(0, -4);
-    if (
-      !fs.existsSync(path.join(__dirname, `../../public`, `/resized_images`))
-    ) {
-      fs.promises.mkdir(path.join(__dirname, `../../public/resized_images`));
-    }
-    if (
-      fs.existsSync(
-        path.join(
-          __dirname,
-          `../../public/resized_images`,
-          `${image}_${width}_${height}.jpg`
-        )
+    await fs.pathExists(
+      path.join(
+        thumbnailsDirPath,
+        `${imageName}_${width}x${height}.${imageExtension}`
       )
-    ) {
-      res.sendFile(
+    )
+  ) {
+    res
+      .status(statusCodes.OK)
+      .sendFile(
         path.join(
-          __dirname,
-          `../../public/resized_images`,
-          `${image}_${width}_${height}.jpg`
+          thumbnailsDirPath,
+          `${imageName}_${width}x${height}.${imageExtension}`
         )
       );
-    } else {
-      try {
-        await resizer(image, width, height).then(async e => {
-          res.sendFile(
-            path.join(
-              __dirname,
-              `../../public/resized_images`,
-              `${e.image}_${e.width}_${e.height}.jpg`
-            )
-          );
-        });
-      } catch (error) {
-        res.send(`couldn't resize the image`);
-      }
+  } else {
+    try {
+      const {
+        width: w,
+        height: h,
+        imageName: n,
+        imageExtension: e,
+      } = await resizer(width, height, imageName, imageExtension);
+
+      res
+        .status(statusCodes.OK)
+        .sendFile(path.join(thumbnailsDirPath, `${n}_${w}x${h}.${e}`));
+    } catch (error) {
+      res.status(404).send(`couldn't resize the image: ${error}`);
     }
   }
+};
+
+/* routes */
+// route for testing
+router.get("/", (_req, res) => {
+  res
+    .status(statusCodes.OK)
+    .send("<h1><b><i>the server is working fine.</i></b></h1>");
 });
 
-// endpoint for displaying the available images
-router.get("/images", async (req: Request, res: Response): Promise<void> => {
-  res.send(`
-  <h1>The Available Images Are:- </h1>
-  <ul>
-    <li>encenadaport.jpg
-    <li>fjord.jpg
-    <li>icelandwaterfall.jpg
-    <li>palmtunnel.jpg
-    <li>santamonica.jpg
-  </ul>
-  `);
-});
-
-// endpoint for displaying a specific image
-router
-  .get("/image", async (req: Request, res: Response): Promise<void> => {
-    res.send(`Type the id of the image`);
-  })
-  .get("/image/?:id", async (req: Request, res: Response): Promise<void> => {
-    const id: number = parseInt(req.params.id);
-    if (1 <= id && id <= 5) {
-      res.send(availableImages[id - 1]);
-    } else {
-      res.send(`image with id = ${id} is not found`);
+// route for resizing an image from the images directory
+router.get(
+  "/resize",
+  query("width").isInt({ min: 1 }),
+  query("height").isInt({ min: 1 }),
+  query("image").isString().trim().notEmpty(),
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(statusCodes.BadRequest).send(`
+      <h1>Invalid image, height or width.</h1>
+      <h2>width and height must be positive integers</h2>
+      <h2>image must be with the following extensions:</h2>
+      <p>(png, jpeg, jpg, webp, avif, tiff, gif, svg)</p>
+      `);
+      return;
     }
-  });
+
+    const data = matchedData(req);
+    const width = Math.abs(parseInt(data.width));
+    const height = Math.abs(parseInt(data.height));
+    const [imageName, imageExtension] = data.image.split(".");
+    const isValidImage = supportedFormats.some(
+      format => format === imageExtension
+    );
+    if (!isValidImage) {
+      res.status(statusCodes.BadRequest).send(`
+      <h1>Invalid image, height or width.</h1>
+      <h2>width and height must be positive integers</h2>
+      <h2>image must be with the following extensions:</h2>
+      <p>(png, jpeg, jpg, webp, avif, tiff, gif, svg)</p>
+      `);
+      return;
+    }
+    resize(res, width, height, imageName, imageExtension);
+  }
+);
+
+// route for resizing any image
+router.post(
+  "/resize",
+  upload,
+  body("width").isInt({ min: 1 }),
+  body("height").isInt({ min: 1 }),
+  (req, res) => {
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+      res.status(statusCodes.BadRequest).send(`
+      <h1>Invalid image, height or width.</h1>
+      <h2>width and height must be positive integers</h2>
+      <h2>image must be with the following extensions:</h2>
+      <p>(png, jpeg, jpg, webp, aviv, tiff, gif, svg)</p>
+      `);
+      return;
+    }
+    const data = matchedData(req);
+    const width = Math.abs(parseInt(data.width));
+    const height = Math.abs(parseInt(data.height));
+    const [imageName, imageExtension] = (
+      req.file?.originalname as string
+    ).split(".");
+    resize(res, width, height, imageName, imageExtension);
+  }
+);
+
+// routes for displaying images
+router
+  .get("/images", async (_req, res) => {
+    if ((await syncImages()).length === 0) {
+      res.status(statusCodes.OK).send("the images folder is empty");
+      return;
+    }
+    res.status(statusCodes.OK).render(listImagesDirPath, {
+      PORT,
+      dir: "images",
+      images: images,
+    });
+  })
+  .get("/image", async (_req, res) => {
+    if ((await syncImages()).length === 0) {
+      res.status(statusCodes.OK).send("the images folder is empty");
+      return;
+    }
+    res.status(statusCodes.BadRequest).send(`Type the id of the image`);
+  })
+  .get(
+    "/image/?:id",
+    param("id").isInt({
+      min: 1,
+    }),
+    async (req, res) => {
+      if ((await syncImages()).length === 0) {
+        res.status(statusCodes.OK).send("the images folder is empty");
+        return;
+      }
+      const result = validationResult(req);
+      const id = parseInt(matchedData(req).id);
+
+      if (!result.isEmpty() || id > images.length) {
+        res.status(statusCodes.BadRequest).send(`
+        <h1>image with id = ${req.params?.id} is not found</h1>
+        <h2>the id must be in the range of [1, ${images.length}]`);
+        return;
+      }
+
+      res
+        .status(statusCodes.OK)
+        .sendFile(path.join(imagesDirPath, images[id - 1]));
+    }
+  );
+
+// routes for displaying the thumbnails
+router
+  .get("/thumbnails", async (_req, res) => {
+    if ((await syncThumbnails()).length === 0) {
+      res.status(statusCodes.OK).send("the thumbnails folder is empty");
+      return;
+    }
+    res.status(statusCodes.OK).render(listImagesDirPath, {
+      PORT,
+      dir: "thumbnails",
+      images: thumbnails,
+    });
+  })
+  .get("/thumbnail", async (_req, res) => {
+    if ((await syncThumbnails()).length === 0) {
+      res.status(statusCodes.OK).send("the thumbnails folder is empty");
+      return;
+    }
+    res.status(statusCodes.BadRequest).send(`Type the id of the resized image`);
+  })
+  .get(
+    "/thumbnail/?:id",
+    param("id").isInt({
+      min: 1,
+    }),
+    async (req, res) => {
+      if ((await syncThumbnails()).length === 0) {
+        res.status(statusCodes.OK).send("the thumbnails folder is empty");
+        return;
+      }
+      const result = validationResult(req);
+      const id = parseInt(matchedData(req).id);
+
+      if (!result.isEmpty() || id > thumbnails.length) {
+        res.status(statusCodes.BadRequest).send(`
+        <h1>thumbnail with id = ${req.params?.id} is not found</h1>
+        <h2>the id must be in the range of [1, ${thumbnails.length}]`);
+        return;
+      }
+
+      res
+        .status(statusCodes.OK)
+        .sendFile(path.join(thumbnailsDirPath, thumbnails[id - 1]));
+    }
+  );
 
 export default router;
