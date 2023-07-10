@@ -35,7 +35,7 @@ form {
     align-items: center;
     justify-content: center;
     height: 80px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     background: #27ae60;
     border-radius: 10px 10px 0 0;
@@ -49,7 +49,19 @@ form {
       padding: 10px;
       align-items: center;
       justify-content: center;
+      gap: 10px;
 
+      label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        p {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
       input {
         appearance: none;
         width: 100%;

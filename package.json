@@ -37,6 +37,8 @@
   "devDependencies": {
     "@types/ejs": "^3.1.2",
     "@types/express": "^4.17.13",
+    "@types/fluent-ffmpeg": "^2.1.21",
+    "@types/fs-extra": "^11.0.1",
     "@types/jasmine": "^3.10.3",
     "@types/morgan": "^1.9.4",
     "@types/multer": "^1.4.7",
@@ -45,12 +47,14 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jasmine": "^4.0.2",
     "jasmine-spec-reporter": "^7.0.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
     "supertest": "^6.2.2",
@@ -58,13 +62,10 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.3.1",
     "express": "^4.17.2",
     "express-validator": "^7.0.1",
+    "fluent-ffmpeg": "^2.1.2",
     "fs-extra": "^11.1.1",
-    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "sharp": "^0.30.1"
   }

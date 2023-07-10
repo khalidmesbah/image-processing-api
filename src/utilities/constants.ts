@@ -6,10 +6,18 @@ import fs from "fs-extra";
 dotenv.config();
 
 const PORT = process.env.PORT || 3003;
+const HOST = process.env.HOST || "http://localhost:" + PORT;
+const ENV = process.env.ENV || "development";
 
 const imagesDirPath = path.join(__dirname, `../../public`, `images`);
 const thumbnailsDirPath = path.join(__dirname, `../../public`, `thumbnails`);
-const listImagesDirPath = path.join(__dirname, "../../views/listImages.ejs");
+const listImagesDirPath = path.join(
+  __dirname,
+  "../../views/",
+  "listImages.ejs"
+);
+const smallDirPath = path.join(__dirname, "../../public", "small");
+const sampleDirPath = path.join(__dirname, "../../public", "sample");
 
 const supportedFormats = [
   "png",
@@ -21,7 +29,6 @@ const supportedFormats = [
   "gif",
   "svg",
 ];
-
 let images: string[] = [];
 const syncImages = async () => {
   try {
@@ -120,7 +127,11 @@ export {
   imagesDirPath,
   thumbnailsDirPath,
   listImagesDirPath,
+  smallDirPath,
+  sampleDirPath,
   PORT,
+  HOST,
+  ENV,
   supportedFormats,
   statusCodes,
 };

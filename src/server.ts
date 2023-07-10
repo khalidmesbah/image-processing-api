@@ -1,14 +1,16 @@
 import express from "express";
 import path from "path";
 import router from "./routes/route";
-import { PORT, statusCodes } from "./utilities/constants";
+import { HOST, PORT, ENV, statusCodes } from "./utilities/constants";
 import morgan from "morgan";
 
 // create the application object
 const app = express();
 
 // HTTP request logger middleware
-app.use(morgan("tiny"));
+if (ENV === "development") {
+  app.use(morgan("tiny"));
+}
 
 // Embedded JavaScript templates
 app.set("view engine", "ejs");
@@ -20,10 +22,11 @@ app.use("/api", router);
 app.use(express.static(path.join(__dirname, "../public")));
 
 // render the home page
-app.get("/", (_req, res) => {
+app.get("/", (req, res) => {
+  console.log(`req`, req.hostname);
   res
     .status(statusCodes.OK)
-    .render(path.join(__dirname, `../views`, `index.ejs`), { PORT });
+    .render(path.join(__dirname, `../views`, `index.ejs`), { HOST });
 });
 
 // render the error page
@@ -36,7 +39,7 @@ app.use((_req, res) =>
 // create the webserver at the specified host and port
 // run the server with an optional callback argument
 app.listen(PORT, () => {
-  console.log(`the server is running on port http://localhost:${PORT}`);
+  console.log(`the server is running on ${HOST}`);
 });
 
 // export the application object to test the endpoints

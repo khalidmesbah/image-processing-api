@@ -16,12 +16,13 @@
 > ## Endpoints
 
 ```sh
-GET / # the main endpoint
+GET / # go to the main page
 
-GET /api # the api endpoint
+GET /api # test the api endpoint
 
-GET /api/resize # resize an image from the images folder
-POST /api/resize # resize any image
+DELETE /api/clear # clear the cache
+
+POST /api/resize # resize an image
 
 GET /api/images # list all the images in the images folder
 GET /api/image # list a specific image from the images folder
@@ -34,7 +35,7 @@ GET /api/thumbnail/?:id # list a specific image from the thumbnails folder
 
 > ## Scripts
 
-```bash
+```sh
     # install the dependencies
     npm i
     # run the project
@@ -45,40 +46,38 @@ GET /api/thumbnail/?:id # list a specific image from the thumbnails folder
 
 > ## Project's Stack
 
-### devDependencies
+### Development Dependencies
 
-- @types/ejs: TypeScript type definitions for EJS templating engine.
-- @types/express: TypeScript type definitions for Express web framework.
-- @types/jasmine: TypeScript type definitions for Jasmine testing framework.
-- @types/morgan: TypeScript type definitions for Morgan logging middleware.
-- @types/multer: TypeScript type definitions for Multer middleware for handling file uploads.
-- @types/node: TypeScript type definitions for Node.js.
-- @types/sharp: TypeScript type definitions for Sharp image processing library.
-- @types/supertest: TypeScript type definitions for Supertest HTTP testing library.
-- @typescript-eslint/eslint-plugin: ESLint plugin for TypeScript.
-- @typescript-eslint/parser: TypeScript parser for ESLint.
-- ejs: Embedded JavaScript templating engine.
-- eslint: JavaScript and TypeScript linter.
-- eslint-config-prettier: ESLint configuration that disables formatting-related rules to avoid conflicts with Prettier.
-- eslint-plugin-prettier: ESLint plugin that adds Prettier as a rule.
-- jasmine: Testing framework.
-- jasmine-spec-reporter: Custom Jasmine reporter that outputs test results in a readable format.
-- nodemon: Utility that automatically restarts the Node.js application when changes are detected.
-- prettier: Opinionated code formatter.
-- supertest: HTTP testing library for Node.js.
-- ts-node: TypeScript execution environment and REPL for Node.js.
-- typescript: TypeScript compiler.
+- @types/ejs: TypeScript typings for the EJS templating engine.
+- @types/express: TypeScript typings for the Express web framework.
+- @types/fluent-ffmpeg: TypeScript typings for the Fluent FFmpeg video processing library.
+- @types/jasmine: TypeScript typings for the Jasmine testing framework.
+- @types/morgan: TypeScript typings for the Morgan HTTP request logger middleware.
+- @types/multer: TypeScript typings for the Multer middleware for handling file uploads.
+- @types/node: TypeScript typings for the Node.js runtime environment.
+- @types/sharp: TypeScript typings for the Sharp image processing library.
+- @types/supertest: TypeScript typings for the Supertest HTTP testing library.
+- @typescript-eslint/eslint-plugin and @typescript-eslint/parser: ESLint integration for TypeScript.
+- ejs: EJS templating engine for rendering dynamic HTML pages.
+- eslint, eslint-config-prettier, and eslint-plugin-prettier: code linting and formatting.
+- jasmine and jasmine-spec-reporter: Jasmine testing framework and a reporter for displaying test results.
+- nodemon: development tool that automatically restarts the server when changes are made to the code.
+- prettier: code formatter.
+- supertest: HTTP testing library.
+- ts-node: TypeScript execution environment.
+- typescript: TypeScript language compiler.
 
-### dependencies
+### Production Dependencies
 
-- body-parser: Middleware for parsing HTTP request bodies.
-- dotenv: Loads environment variables from a .env file.
-- express: Web framework.
-- express-validator: Middleware for validating and sanitizing HTTP requests.
-- fs-extra: Adds file system methods that are not included in the Node.js fs module.
+- @types/fs-extra: TypeScript typings for the fs-extra library, which provides additional functionality for the Node.js fs module.
+- dotenv: module for loading environment variables from a .env file.
+- express: Express web framework.
+- express-validator: library for validating incoming HTTP requests in Express.
+- fluent-ffmpeg: video processing library.
+- fs-extra: library that provides additional functionality for the Node.js fs module.
 - morgan: HTTP request logger middleware.
-- multer: Middleware for handling HTTP requests that contain files.
-- sharp: Image processing library.
+- multer: middleware for handling file uploads in Express.
+- sharp: image processing library.
 
 > ## project-rubric
 >
@@ -112,11 +111,11 @@ GET /api/thumbnail/?:id # list a specific image from the thumbnails folder
 
 1. [x] Add additional processing to accept and output other image formats than JPG.
 2. [x] Modify the thumbnail filename to include the image size to allow for multiple sizes of the same image.
-3. [ ] Further explore the options in the Sharp module and add additional processing options.
+3. [x] Further explore the options in the Sharp module and add additional processing options.
 4. [x] Add in logging to record when images are processed or accessed.
 5. [x] Create a front-end for uploading more images to the full-size directory.
 6. [x] Create a front-end that displays a thumbnail directory.
 7. [x] Create a front-end that allows for the selection of how to process a selected image.
 8. [x] Make a logger middleware.
 9. [x] Add endpoint tests & more tests to the app.
-10. [ ] Make images load faster.
+10. [x] Make images load faster.

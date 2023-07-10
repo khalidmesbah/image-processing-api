@@ -6,6 +6,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>List Images</title>
+  <style>
+    .blur-div::before {
+      position: absolute;
+      content: "";
+      inset: 0;
+      animation: pulse 2.5s infinite;
+      z-index: 2;
+    }
+
+    .blur-div.loaded::before {
+      content: none;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+
+        background-color: rgba(255, 255, 255, 0);
+      }
+
+      50% {
+
+        background-color: rgba(255, 255, 255, .1);
+      }
+    }
+
+    .blur-div.loaded>img {
+      opacity: 1;
+    }
+
+    .blur-div>img {
+      opacity: 0;
+      transition: opacity 200ms ease-in-out;
+    }
+  </style>
 </head>
 
 <body>
@@ -15,15 +51,14 @@
   <div id="container"></div>
 
   <script>
-    const port = JSON.parse('<%- JSON.stringify(PORT) %>');
-    const baseUrl = `http://localhost:${port}`;
+    const HOST = JSON.parse('<%- JSON.stringify(HOST) %>');
     const dir = JSON.parse('<%- JSON.stringify(dir) %>');
     const images = JSON.parse('<%- JSON.stringify(images) %>');
     const container = document.getElementById("container");
 
     document.getElementById("h1").textContent = dir;
     document.getElementById("btn").addEventListener("click", () => {
-      document.location.href = baseUrl;
+      document.location.href = HOST;
     })
 
     container.style.cssText = `
@@ -37,27 +72,8 @@
     const fragment = document.createDocumentFragment();
     images.forEach((image, index) => {
       const div = document.createElement("div");
-      const img = document.createElement("img");
-      img.src = `/${dir}/${images[index]}`;
-      img.title = images[index];
-      const small = document.createElement("small");
-      small.textContent = image;
-      small.title = image;
-      small.style.cssText = `
-        position:absolute;
-        inset:80% 0 0 0;
-        width:100%;
-        background:#0009;
-        color:#fff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        z-index:1;
-        padding:5px;
-      `
       div.addEventListener("click", () => {
-        const baseUrl = `http://localhost:${port}/api/${dir.slice(0,-1)}/${index+1}`;
-        document.location.href = baseUrl;
+        document.location.href = `${HOST}/api/${dir.slice(0,-1)}/${index+1}`;
       });
       div.style.cssText = `
         position:relative;
@@ -67,18 +83,65 @@
         cursor:pointer;
         justify-content:center;
         border:1px solid #000;
-        overflow:hidden;
+        background-image: url("/small/small-${images[index]}");
+        background-size: cover;
+        background-position: center; 
         `;
+      div.className = "blur-div";
+
+      const img = document.createElement("img");
+      img.src = `/${dir}/${images[index]}`;
+      img.title = images[index];
       img.style.cssText = `
         max-width:100%;
+        max-height:100%;
         display:flex;
+        object-position: center;
+        object-fit: cover;
         `;
+      img.loading = "lazy";
+
+      const small = document.createElement("small");
+      small.textContent = image;
+      small.title = image;
+      small.style.cssText = `
+        position:absolute;
+        inset:80% 0 0 0;
+        max-width:100%;
+        background:#0009;
+        color:#fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        z-index:1;
+        padding:5px;
+      `;
+
       div.appendChild(small);
       div.appendChild(img);
+
       fragment.appendChild(div);
     });
 
     container.appendChild(fragment);
+
+    // lazy loading
+    const blurDivs = document.querySelectorAll(".blur-div")
+    console.log(blurDivs)
+    blurDivs.forEach(div => {
+      const img = div.querySelector("img");
+
+      function loaded() {
+        div.classList.add("loaded")
+        img.removeEventListener("load", loaded)
+      };
+
+      if (img.complete) {
+        loaded();
+      } else {
+        img.addEventListener("load", loaded);
+      };
+    });
   </script>
 </body>
 

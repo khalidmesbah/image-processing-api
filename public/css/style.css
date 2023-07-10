@@ -32,7 +32,7 @@ form h1 {
   align-items: center;
   justify-content: center;
   height: 80px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   background: #27ae60;
   border-radius: 10px 10px 0 0;
@@ -45,6 +45,18 @@ form .form-body .row {
   padding: 10px;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+}
+form .form-body .row label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+form .form-body .row label p {
+  font-size: 20px;
+  font-weight: bold;
 }
 form .form-body .row input {
   -webkit-appearance: none;
