@@ -146,7 +146,6 @@ describe(`POST /api/resize`, async () => {
     image,
     statusCodes.BadRequest
   );
-  test("blur is 0", result.fails, 100, 100, 0, image, statusCodes.BadRequest);
   test(
     "blur is more than 1000",
     result.fails,
@@ -156,89 +155,70 @@ describe(`POST /api/resize`, async () => {
     image,
     statusCodes.BadRequest
   );
-  test(
-    "blur is less than 0.3",
-    result.fails,
-    100,
-    100,
-    0.2,
-    image,
-    statusCodes.BadRequest
-  );
   // wrong image
   test("image with a wrong format", result.fails, 100, 100, 0.3, txt, 500);
 });
 
-describe("GET /api/images", () => {
+describe("GET /api/images/:id?", () => {
   it(`"get all images in the /public/images/ folder" request ${result.succeeds}`, async () => {
     const res = await request.get("/api/images");
     expect(res.status).toBe(statusCodes.OK);
   });
-});
 
-describe("GET /api/image", () => {
-  it(`"get an image from the /public/images/ folder without id" request ${result.fails}`, async () => {
-    const res = await request.get("/api/image");
-    expect(res.status).toBe(statusCodes.BadRequest);
-  });
-});
-
-describe("GET /api/image/?:id", () => {
   it(`"get the first image from the /public/images/ folder" request ${result.succeeds}`, async () => {
-    const res = await request.get("/api/image/1");
+    const res = await request.get("/api/images/1");
     expect(res.status).toBe(statusCodes.OK);
   });
+
   it(`"get the last image from the /public/images/ folder" request ${result.succeeds}`, async () => {
-    const res = await request.get(`/api/image/${images.length}`);
+    const res = await request.get(`/api/images/${images.length}`);
     expect(res.status).toBe(statusCodes.OK);
   });
+
   it(`"get an image from the /public/images/ folder with id = 0" request ${result.fails}`, async () => {
-    const res = await request.get("/api/image/0");
+    const res = await request.get("/api/images/0");
     expect(res.status).toBe(statusCodes.BadRequest);
   });
+
   it(`"get an image from the /public/images/ folder with id = -2" request ${result.fails}`, async () => {
-    const res = await request.get("/api/image/-2");
+    const res = await request.get("/api/images/-2");
     expect(res.status).toBe(statusCodes.BadRequest);
   });
+
   it(`"get an image from the /public/images/ folder with id bigger than the number of images" request ${result.fails}`, async () => {
-    const res = await request.get(`/api/image/${images.length + 1}`);
+    const res = await request.get(`/api/images/${images.length + 1}`);
     expect(res.status).toBe(statusCodes.BadRequest);
   });
 });
 
-describe("GET /api/thumbnails", () => {
+describe("GET /api/thumbnails/:id?", () => {
   it(`"get all thumbnails in the /public/thumbnails/ folder" request ${result.succeeds}`, async () => {
     const res = await request.get("/api/thumbnails");
     expect(res.status).toBe(statusCodes.OK);
   });
-});
 
-describe("GET /api/thumbnail", () => {
-  it(`"get a thumbnail from the /public/thumbnails/ folder without id" request ${result.fails}`, async () => {
-    const res = await request.get("/api/thumbnail");
-    expect(res.status).toBe(statusCodes.BadRequest);
-  });
-});
-
-describe("GET /api/thumbnail/?:id", async () => {
   it(`"get the first thumbnail from the /public/thumbnails/ folder" request ${result.succeeds}`, async () => {
-    const res = await request.get("/api/thumbnail/1");
+    const res = await request.get("/api/thumbnails/1");
     expect(res.status).toBe(statusCodes.OK);
   });
+
   it(`"get the last thumbnail from the /public/thumbnails/ folder" request ${result.succeeds}`, async () => {
-    const res = await request.get(`/api/thumbnail/${thumbnails.length}`);
+    const res = await request.get(`/api/thumbnails/${thumbnails.length}`);
     expect(res.status).toBe(statusCodes.OK);
   });
+
   it(`"get a thumbnail from the /public/thumbnails/ folder with id = 0" request ${result.fails}`, async () => {
-    const res = await request.get("/api/thumbnail/0");
+    const res = await request.get("/api/thumbnails/0");
     expect(res.status).toBe(statusCodes.BadRequest);
   });
+
   it(`"get a thumbnail from the /public/thumbnails/ folder with id = -2" request ${result.fails}`, async () => {
-    const res = await request.get("/api/thumbnail/-2");
+    const res = await request.get("/api/thumbnails/-2");
     expect(res.status).toBe(statusCodes.BadRequest);
   });
+
   it(`"get a thumbnail from the /public/thumbnails/ folder with id bigger than the number of thumbnails" request ${result.fails}`, async () => {
-    const res = await request.get(`/api/thumbnail/${thumbnails.length + 1}`);
+    const res = await request.get(`/api/thumbnails/${thumbnails.length + 1}`);
     expect(res.status).toBe(statusCodes.BadRequest);
   });
 });

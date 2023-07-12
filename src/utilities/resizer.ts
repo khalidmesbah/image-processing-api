@@ -16,7 +16,7 @@ const resizer = async (
   imageName: string,
   blur?: number
 ): Promise<thumbnail> => {
-  const isBlurred = blur && blur > 0.3 ? "_" + blur : "";
+  const isBlurred = blur && blur >= 0.3 ? "_" + blur : "";
   const image = path.join(imagesDirPath, `${imageName}.webp`);
 
   const newImage = path.join(
@@ -30,6 +30,7 @@ const resizer = async (
     `small-${imageName}.webp`
   );
   const isSmallImageForImagesDirExist = await fs.exists(smallImageForImagesDir);
+
   const smallImageForThumbnailsDirPath = path.join(
     smallDirPath,
     `small-${imageName}_${width}x${height}${isBlurred}.webp`
@@ -37,6 +38,7 @@ const resizer = async (
   const isSmallImageExistForThumbnailDirPath = await fs.exists(
     smallImageForThumbnailsDirPath
   );
+
   if (!isSmallImageExistForThumbnailDirPath) {
     ffmpeg(image)
       .outputOptions("-vf", "scale=20:-1")
@@ -49,6 +51,7 @@ const resizer = async (
       })
       .save(smallImageForThumbnailsDirPath);
   }
+
   if (!isSmallImageForImagesDirExist) {
     ffmpeg(image)
       .outputOptions("-vf", "scale=20:-1")
@@ -62,9 +65,20 @@ const resizer = async (
       .save(smallImageForImagesDir);
   }
 
+  if (isBlurred) {
+    return await sharp(image)
+      .resize(width, height)
+      .blur(blur)
+      .webp()
+      .toFile(newImage)
+      .catch(err => {
+        throw err;
+      })
+      .then(() => ({ width, height, imageName }));
+  }
+
   return await sharp(image)
     .resize(width, height)
-    .blur(blur)
     .webp()
     .toFile(newImage)
     .catch(err => {

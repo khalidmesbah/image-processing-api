@@ -73,7 +73,7 @@
     images.forEach((image, index) => {
       const div = document.createElement("div");
       div.addEventListener("click", () => {
-        document.location.href = `${HOST}/api/${dir.slice(0,-1)}/${index+1}`;
+        document.location.href = `${HOST}/api/${dir}/${index + 1}`;
       });
       div.style.cssText = `
         position:relative;

@@ -47,7 +47,8 @@ const resize = async (
   imageName: string,
   blur?: number
 ) => {
-  const isBlurred = blur && blur > 0.3 ? "_" + blur : "";
+  const isBlurred = blur && blur >= 0.3 ? "_" + blur : "";
+
   await fs.ensureDir(thumbnailsDirPath);
   const expectedImage = path.join(
     thumbnailsDirPath,
@@ -99,13 +100,13 @@ router.delete("/clear", async (_req, res) => {
   }
 });
 
-// route for resizing any image
+// route for resizing an image
 router.post(
   "/resize",
   upload,
   body("width").isInt({ min: 1 }),
   body("height").isInt({ min: 1 }),
-  body("blur").isFloat({ min: 0.3, max: 1000 }),
+  body("blur").isFloat({ min: 0, max: 1000 }),
   async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
@@ -130,36 +131,17 @@ router.post(
   }
 );
 
-// routes for displaying images
-router
-  .get("/images", async (_req, res) => {
+// route for displaying images
+router.get(
+  "/images/:id?",
+  param("id").isInt({ min: 1 }).optional(),
+  async (req, res) => {
     if ((await syncImages()).length === 0) {
       res.status(statusCodes.OK).send("the images folder is empty");
       return;
     }
-    res.status(statusCodes.OK).render(listImagesDirPath, {
-      HOST,
-      dir: "images",
-      images,
-    });
-  })
-  .get("/image", async (_req, res) => {
-    if ((await syncImages()).length === 0) {
-      res.status(statusCodes.OK).send("the images folder is empty");
-      return;
-    }
-    res.status(statusCodes.BadRequest).send(`Type the id of the image`);
-  })
-  .get(
-    "/image/?:id",
-    param("id").isInt({
-      min: 1,
-    }),
-    async (req, res) => {
-      if ((await syncImages()).length === 0) {
-        res.status(statusCodes.OK).send("the images folder is empty");
-        return;
-      }
+
+    if (!isNaN(req.params?.id)) {
       const result = validationResult(req);
       const id = parseInt(matchedData(req).id);
 
@@ -173,39 +155,27 @@ router
       res
         .status(statusCodes.OK)
         .sendFile(path.join(imagesDirPath, images[id - 1]));
-    }
-  );
-
-// routes for displaying the thumbnails
-router
-  .get("/thumbnails", async (_req, res) => {
-    if ((await syncThumbnails()).length === 0) {
-      res.status(statusCodes.OK).send("the thumbnails folder is empty");
       return;
     }
+
     res.status(statusCodes.OK).render(listImagesDirPath, {
       HOST,
-      dir: "thumbnails",
-      images: thumbnails,
+      dir: "images",
+      images,
     });
-  })
-  .get("/thumbnail", async (_req, res) => {
+  }
+);
+
+// route for displaying the thumbnails
+router.get(
+  "/thumbnails/:id?",
+  param("id").isInt({ min: 1 }).optional(),
+  async (req, res) => {
     if ((await syncThumbnails()).length === 0) {
       res.status(statusCodes.OK).send("the thumbnails folder is empty");
       return;
     }
-    res.status(statusCodes.BadRequest).send(`Type the id of the resized image`);
-  })
-  .get(
-    "/thumbnail/?:id",
-    param("id").isInt({
-      min: 1,
-    }),
-    async (req, res) => {
-      if ((await syncThumbnails()).length === 0) {
-        res.status(statusCodes.OK).send("the thumbnails folder is empty");
-        return;
-      }
+    if (!isNaN(req.params?.id)) {
       const result = validationResult(req);
       const id = parseInt(matchedData(req).id);
 
@@ -219,7 +189,14 @@ router
       res
         .status(statusCodes.OK)
         .sendFile(path.join(thumbnailsDirPath, thumbnails[id - 1]));
+      return;
     }
-  );
+    res.status(statusCodes.OK).render(listImagesDirPath, {
+      HOST,
+      dir: "thumbnails",
+      images: thumbnails,
+    });
+  }
+);
 
 export default router;

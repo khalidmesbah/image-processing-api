@@ -11,26 +11,27 @@
 > ## Functionalities
 
 - resize an image.
+- list all images
+- list all thumbnails
 - read and write to your disk via a Node.js express server rather than a database.
+- cache previously resized images
+- the images are saved as webp and lazy-loaded
+- the thumbnails are saved as webp and lazy-loaded
 
 > ## Endpoints
 
 ```sh
-GET / # go to the main page
+GET / # for going to the main page
 
-GET /api # test the api endpoint
+GET /api # for testing the api endpoint
 
-DELETE /api/clear # clear the cache
+DELETE /api/clear # for clearng the cache
 
-POST /api/resize # resize an image
+POST /api/resize # for resizing an image
 
-GET /api/images # list all the images in the images folder
-GET /api/image # list a specific image from the images folder
-GET /api/image/?:id # list a specific image from the images folder
+GET /api/images/:id? # for serving images and rendering a list of images, if images exist, with error handling for invalid requests.
 
-GET /api/thumbnails # list all the thumbnails in the thumbnails folder
-GET /api/thumbnail # list a specific image from the thumbnails folder
-GET /api/thumbnail/?:id # list a specific image from the thumbnails folder
+GET /api/thumbnails/:id? # for serving thumbnail images and rendering a list of thumbnails, if thumbnails exist, with error handling for invalid requests.
 ```
 
 > ## Scripts
